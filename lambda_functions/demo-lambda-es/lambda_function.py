@@ -20,8 +20,16 @@ else:
 # Environment Variables
 region_name = os.getenv('region_name')
 es_endpoint = os.getenv('es_endpoint')
-upload = False
-get_sentiment = False
+upload = os.getenv('upload', 'False')
+get_sentiment = os.getenv('get_sentiment', 'False')
+if upload == 'True':
+    upload = True
+else:
+    upload = False
+if get_sentiment == 'True':
+    get_sentiment = True
+else:
+    get_sentiment = False
 
 
 class ESPipeline(object):

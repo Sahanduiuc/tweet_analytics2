@@ -29,16 +29,7 @@ for key, value in config.items():
 # Environment Variables
 region_name = os.getenv('region_name')
 es_endpoint = os.getenv('es_endpoint')
-upload = os.getenv('upload', 'False')
-get_sentiment = os.getenv('get_sentiment', 'False')
-if upload == 'True':
-    upload = True
-else:
-    upload = False
-if get_sentiment == 'True':
-    get_sentiment = True
-else:
-    get_sentiment = False
+
 
 class ESPipeline(object):
     es_index = 'tweet-index'
@@ -190,6 +181,9 @@ if __name__ == '__main__':
     bucket = 'demo-tweet-s3'
     # TODO: Change `key` to any key (file path) available in the bucket
     key = '2018/09/10/06/demo-firehose-1-2018-09-10-06-00-00-72fa1008-992c-4afe-9737-4724d2fc3e27'
+
+    upload = False
+    get_sentiment = False
 
     pipeline = ESPipeline(upload=upload, get_sentiment=get_sentiment)
     pipeline.run(bucket=bucket, key=key)
